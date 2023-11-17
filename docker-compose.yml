@@ -1,0 +1,31 @@
+version: '3.8'
+services:
+  db:
+    image: postgres:latest
+    restart: always
+    env_file:
+        - .env
+    environment:
+      DB_DATABASE: ${DB_DATABASE}
+      DB_USERNAME: ${DB_USERNAME}
+      DB_PASSWORD: ${DB_PASSWORD}
+    container_name: db
+    volumes:
+      - ~/pgdata:/var/lib/postgresql/data
+    ports:
+      - '5432:5432'
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: nest-docker
+    environment:
+      - PORT=${PORT}
+    ports:
+      - '3000:3000'
+    depends_on:
+      - db
+    volumes:
+      - ./src:/app/src
+      - /usr/src/node_modules
+    command: npm run start:dev

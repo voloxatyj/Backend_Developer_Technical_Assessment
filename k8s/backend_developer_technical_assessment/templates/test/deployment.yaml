@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: backend_developer_technical_assessment
+  name: backend_developer_technical_assessment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: backend_developer_technical_assessment
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: backend_developer_technical_assessment
+    spec:
+      containers:
+      - image: voloxatyj/backend_developer_technical_assessment:latest
+        name: backend-developer-technical-assessment-5bv7l
+        ports:
+        - containerPort: 3000
+        resources: {}
+status: {}
